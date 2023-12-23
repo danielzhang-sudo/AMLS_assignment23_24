@@ -72,6 +72,10 @@ def main():
         for i in range(len(fit_models)):
             validation(fit_models[i], models_name[i], X_val, y_val, is_validation=is_validation)
 
+    if len(fit_models) == len(models_name):
+        for i in range(len(fit_models)):
+            validation(fit_models[i], models_name[i], X_test, y_test, is_validation=False)
+
     return
 
 def create_models(tune_parameters):
@@ -159,9 +163,9 @@ def metrics(models, models_name, x_test, y_test):
 def validation(model, model_name, X_val, y_val, is_validation):
 
     if not is_validation:
-        report = open('report1.txt', 'a')
+        report = open('report.txt', 'a')
     else:
-        report = open('validation_report9.txt', 'a')
+        report = open('validation_report.txt', 'a')
         
     report.write(f'{model_name} score is: {model.score(X_val, y_val)}\n')
 
@@ -193,7 +197,12 @@ def validation(model, model_name, X_val, y_val, is_validation):
     plt.tight_layout()
 
     plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
-    plt.savefig(model_name) 
+    
+    if is_validation:
+        filename = model_name + '-validation'
+    else:
+        filename = model_name + '-test'
+    plt.savefig(filename) 
 
     report.close()
 
