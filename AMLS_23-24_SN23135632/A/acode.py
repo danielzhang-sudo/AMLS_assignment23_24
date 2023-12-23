@@ -12,7 +12,7 @@ from sklearn.metrics import confusion_matrix, classification_report
 
 def main():
 
-    is_validation = False
+    is_validation = True
 
     # Open file
     pneumonia = np.load('./AMLS_23-24_SN23135632/Datasets/pneumoniamnist.npz')
@@ -33,14 +33,14 @@ def main():
 
     # Create the models
     
-    models_name = ['Naive Bayes.jpg', 'LogReg.jpg', 'SGD.jpg', 'Perceptron.jpg', 'K_NN.jpg', 'MLPerceptron.jpg', 'SVC.jpg', 'Decision Tree.jpg']
+    models_name = ['Naive Bayes.jpg', 'LogReg.jpg', 'SGD.jpg', 'Perceptron.jpg', 'K_NN.jpg', 'MLPerceptron.jpg', 'SVC.jpg', 'Decision Tree.jpg', 'Adaboost.jpg', 'Bagging.jpg']
 
     models = create_models(tune_parameters=is_validation)
-    nb_model, logreg_model, sgd_model, percep_model, knn_model, mlp_model, svc_model, tree_model = models
+    # nb_model, logreg_model, sgd_model, percep_model, knn_model, mlp_model, svc_model, tree_model = models
 
     # Train the models
     fit_models = train(models, X_train, y_train)
-    fit_nb, fit_logreg, fit_sgd, fit_percep, fit_knn, fit_mlp, fit_svc, fit_tree = fit_models
+    # fit_nb, fit_logreg, fit_sgd, fit_percep, fit_knn, fit_mlp, fit_svc, fit_tree = fit_models
 
     """
     fit_nb = nb_model.fit(X_train, y_train)
@@ -54,17 +54,12 @@ def main():
     """
 
     """
-    # Create an AdaBoost Classifier
-    adaboost_model = AdaBoostClassifier()
+    
 
     # Train the model
     fit_adaboost = adaboost_model.fit(X_train, y_train)
-
-    # Create a Bagging Classifier
-    bagging_model = BaggingClassifier()
-
-    # Train the model
     fit_bagging = bagging_model.fit(X_train, y_train)
+
     """
 
     # models = [fit_nb, fit_logreg, fit_sgd, fit_percep, fit_knn, fit_mlp, fit_svc, fit_tree]
@@ -89,17 +84,21 @@ def create_models(tune_parameters):
         mlp_model = MLPClassifier() # Multilayer Perceptron model
         svc_model = LinearSVC() # Linear Support Vector Machine Classifier
         tree_model = DecisionTreeClassifier() # Decision Tree Classifier
+        adaboost_model = AdaBoostClassifier() #  AdaBoost Classifier
+        bagging_model = BaggingClassifier() # Bagging Classifier
     else:
         nb_model = GaussianNB() # Naive Bayes model
-        logreg_model = LogisticRegression(penalty='l2') # Default L2 penalty
-        sgd_model = SGDClassifier(loss='log_loss', penalty='l2') # default loss=hinge, penalty=l2
-        percep_model = Perceptron(penalty='l2') # default penalty=none
-        knn_model = KNeighborsClassifier(n_neighbors=7, weights='distance') # default neighbours=5, weights=uniform
-        mlp_model = MLPClassifier(hidden_layer_sizes=(50,)) # default hidden_layer_sizes=(100,), activation=relu
-        svc_model = LinearSVC(penalty='l1', loss='hinge') # default penalty=l2, loss=squared_hinge
-        tree_model = DecisionTreeClassifier(criterion='entropy') # default criterion=gini, aplitter=best
+        logreg_model = LogisticRegression(penalty='l2') # Default L2 penalty # best
+        sgd_model = SGDClassifier(loss='hinge', penalty='l2') # default loss=hinge, penalty=l2 # best
+        percep_model = Perceptron(penalty='l2') # default penalty=none # improves #best
+        knn_model = KNeighborsClassifier(n_neighbors=7, weights='distance') # default neighbours=5, weights=uniform #improves #best
+        mlp_model = MLPClassifier(hidden_layer_sizes=(50,)) # default hidden_layer_sizes=(100,), activation=relu # improves # best
+        svc_model = LinearSVC(penalty='l2', loss='squared_hinge') # default penalty=l2, loss=squared_hinge # improves #best
+        tree_model = DecisionTreeClassifier(criterion='gini', splitter='best') # default criterion=gini, aplitter=best # best gini
+        adaboost_model = AdaBoostClassifier(learning_rate=0.5) # default n_estimators=50, lr=1, #best 
+        bagging_model = BaggingClassifier(n_estimators=50) # default n_estimators=10 # best
 
-    models = [nb_model, logreg_model, sgd_model, percep_model, knn_model, mlp_model, svc_model, tree_model]
+    models = [nb_model, logreg_model, sgd_model, percep_model, knn_model, mlp_model, svc_model, tree_model, adaboost_model, bagging_model]
 
     return models
 
@@ -160,9 +159,9 @@ def metrics(models, models_name, x_test, y_test):
 def validation(model, model_name, X_val, y_val, is_validation):
 
     if not is_validation:
-        report = open('report.txt', 'a')
+        report = open('report1.txt', 'a')
     else:
-        report = open('validation_report.txt', 'a')
+        report = open('validation_report9.txt', 'a')
         
     report.write(f'{model_name} score is: {model.score(X_val, y_val)}\n')
 

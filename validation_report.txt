@@ -1,0 +1,104 @@
+Naive Bayes.jpg score is: 0.9007633587786259
+              precision    recall  f1-score   support
+
+      normal       0.77      0.87      0.82       135
+   pneumonia       0.95      0.91      0.93       389
+
+    accuracy                           0.90       524
+   macro avg       0.86      0.89      0.88       524
+weighted avg       0.91      0.90      0.90       524
+
+*****************************************************
+
+
+LogReg.jpg score is: 0.9427480916030534
+              precision    recall  f1-score   support
+
+      normal       0.89      0.88      0.89       135
+   pneumonia       0.96      0.96      0.96       389
+
+    accuracy                           0.94       524
+   macro avg       0.93      0.92      0.92       524
+weighted avg       0.94      0.94      0.94       524
+
+*****************************************************
+
+
+SGD.jpg score is: 0.9561068702290076
+              precision    recall  f1-score   support
+
+      normal       0.94      0.88      0.91       135
+   pneumonia       0.96      0.98      0.97       389
+
+    accuracy                           0.96       524
+   macro avg       0.95      0.93      0.94       524
+weighted avg       0.96      0.96      0.96       524
+
+*****************************************************
+
+
+Perceptron.jpg score is: 0.933206106870229
+              precision    recall  f1-score   support
+
+      normal       0.94      0.79      0.86       135
+   pneumonia       0.93      0.98      0.96       389
+
+    accuracy                           0.93       524
+   macro avg       0.94      0.89      0.91       524
+weighted avg       0.93      0.93      0.93       524
+
+*****************************************************
+
+
+K_NN.jpg score is: 0.9580152671755725
+              precision    recall  f1-score   support
+
+      normal       0.94      0.89      0.92       135
+   pneumonia       0.96      0.98      0.97       389
+
+    accuracy                           0.96       524
+   macro avg       0.95      0.94      0.94       524
+weighted avg       0.96      0.96      0.96       524
+
+*****************************************************
+
+
+MLPerceptron.jpg score is: 0.9274809160305344
+              precision    recall  f1-score   support
+
+      normal       0.81      0.95      0.87       135
+   pneumonia       0.98      0.92      0.95       389
+
+    accuracy                           0.93       524
+   macro avg       0.89      0.93      0.91       524
+weighted avg       0.94      0.93      0.93       524
+
+*****************************************************
+
+
+SVC.jpg score is: 0.9408396946564885
+              precision    recall  f1-score   support
+
+      normal       0.89      0.87      0.88       135
+   pneumonia       0.96      0.96      0.96       389
+
+    accuracy                           0.94       524
+   macro avg       0.93      0.92      0.92       524
+weighted avg       0.94      0.94      0.94       524
+
+*****************************************************
+
+
+Decision Tree.jpg score is: 0.8969465648854962
+              precision    recall  f1-score   support
+
+      normal       0.80      0.81      0.80       135
+   pneumonia       0.93      0.93      0.93       389
+
+    accuracy                           0.90       524
+   macro avg       0.86      0.87      0.87       524
+weighted avg       0.90      0.90      0.90       524
+
+*****************************************************
+
+
