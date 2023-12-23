@@ -1,1 +1,3 @@
 *.npz
+A/__pycache__
+B/__pycache__
