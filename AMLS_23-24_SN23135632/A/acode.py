@@ -90,4 +90,53 @@ def main():
     fit_bagging = bagging_model.fit(X_train, y_train)
     """
 
+    models = [fit_nb, fit_logreg, fit_sgd, fit_percep, fit_knn, fit_mlp, fit_svc, fit_tree]
+    models_name = ['Naive Bayes.jpg', 'LogReg.jpg', 'SGD.jpg', 'Perceptron.jpg', 'K_NN.jpg', 'MLPerceptron.jpg', 'SVC.jpg', 'Decision Tree.jpg']
+
+    metrics(models, models_name, X_test, y_test)
+
     return
+
+
+def metrics(models, models_name, x_test, y_test):
+    report = open('report.txt', 'w')
+
+    mdl = 0
+    for model in models:
+        
+        report.write(f'{models_name[mdl]} score is: {model.score(x_test, y_test)}\n')
+
+        # print(model.score(x_test, y_test))
+
+        y_pred = model.predict(x_test)
+        cm = confusion_matrix(y_test, y_pred)
+
+        classes = ['normal', 'pneumonia']
+
+        report.write(classification_report(y_test, y_pred, target_names=classes))
+        report.write('\n')
+        report.write("**************************************************************\n\n\n\n")
+
+        plt.figure(figsize=(5,5))
+        plt.title('confusion matrix')
+        tick_marks = np.arange(len(classes))
+        plt.xticks(tick_marks, classes, rotation=45)
+        plt.yticks(tick_marks, classes)
+
+        fmt = 'd' #'.2f'
+        thresh = cm.max() / 2.
+        for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+            plt.text(j, i, format(cm[i, j], fmt),
+                    horizontalalignment="center",
+                    color="white" if cm[i, j] > thresh else "black")
+
+        plt.title('Naïve Bayes')
+        plt.ylabel('True label')
+        plt.xlabel('Predicted label')
+        plt.tight_layout()
+
+        plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
+        plt.savefig(models_name[mdl])
+        mdl=mdl+1
+
+    report.close()
