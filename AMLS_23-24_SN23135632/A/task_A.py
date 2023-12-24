@@ -8,7 +8,7 @@ def main(args):
     ckpt_path = args.ckpt_path
 
     # Open file
-    pneumonia = np.load('./AMLS_23-24_SN23135632/Datasets/pneumoniamnist.npz')
+    pneumonia = np.load('./Datasets/pneumoniamnist.npz')
     
     # Extract training, validation, test images
     x_train = pneumonia['train_images']
@@ -35,7 +35,7 @@ def main(args):
     elif mode == "validation":
         x = X_val
         y = y_val
-    elif mode == "Testing":
+    elif mode == "testing":
         x = X_test
         y = y_test
 

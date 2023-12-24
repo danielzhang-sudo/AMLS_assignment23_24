@@ -17,18 +17,18 @@ def helper(task, mode, alg, ckpt_path, x, y, classes):
         model = create_model(task, mode, alg)
         # Train model
         fit_model = training(model, x, y)
-        ckpt_filename = f'./AMLS_23-24_SN23135632/{task}/{alg}_weights.sav'
+        ckpt_filename = f'./{task}/weights/{alg}_weights.sav'
         pickle.dump(fit_model, open(ckpt_filename, 'wb'))
     elif mode == "validation":
         # Create new model with different hyperparameters
         model = create_model(mode, alg)
         # Test new model on validation set
-        testing(model, mode, alg, x, y, classes)
-        ckpt_filename = f'./AMLS_23-24_SN23135632/{alg}/{alg}_validation_weights.sav'
+        testing(model, task, mode, alg, x, y, classes)
+        ckpt_filename = f'./{alg}/{alg}_validation_weights.sav'
         pickle.dump(fit_model, open(ckpt_filename, 'wb'))
     elif mode == "testing":
         loaded_model = pickle.load(open(ckpt_path, 'rb'))
-        testing(loaded_model, mode, alg, x, y, classes)
+        testing(loaded_model, task, mode, alg, x, y, classes)
 
 def create_model(task, mode, alg):
     if mode == "validation":
@@ -84,16 +84,16 @@ def training(model, X_train, y_train):
     fit_model = model.fit(X_train, y_train)
     return fit_model
 
-def testing(model, mode, model_name, X, y, classes):
+def testing(model, task, mode, model_name, X, y, classes):
     report = ''
     filename = ''
 
     if mode == "validation":
-        report = open('validation_report.txt', 'a')
+        report = open(f'{task}/validation_report.txt', 'a')
         filename = model_name + '-validation'
     elif mode == "testing":
-        report = open('report.txt', 'a')
-        filename = model_name + '-test'
+        report = open('testing_report.txt', 'a')
+        filename = f'./{task}/figures/' + model_name + '-test'
         
     report.write(f'{model_name} score is: {model.score(X, y)}\n')
 

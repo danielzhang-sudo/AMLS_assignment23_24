@@ -1,14 +1,14 @@
 import argparse
-from A import acode
-from B import bcode
+from A import task_A
+from B import task_B
 
 def main(args):
     task = args.task
 
     if task=="A":
-        acode.main(args)
+        task_A.main(args)
     elif task=="B":
-        bcode.main(args)
+        task_B.main(args)
     else:
         print("Run with the correct arguments")
         raise 

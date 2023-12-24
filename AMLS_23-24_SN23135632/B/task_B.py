@@ -9,7 +9,7 @@ def main(args):
     ckpt_path = args.ckpt_path
 
     # Open file
-    path = np.load('./AMLS_23-24_SN23135632/Datasets/pathmnist.npz')
+    path = np.load('./Datasets/pathmnist.npz')
     
     # Extract training, validation, test images
     x_train = path['train_images']
@@ -30,7 +30,7 @@ def main(args):
     X_test = x_test.reshape(x_test.shape[0], x_test.shape[1]**2)
     X_val = x_val.reshape(x_val.shape[0], x_val.shape[1]**2)
 
-    classes = ['normal', 'pneumonia']
+    classes = ['0', '1', '2', '3', '4', '5', '6', '7', '8']
 
     x = ''
     y = ''
