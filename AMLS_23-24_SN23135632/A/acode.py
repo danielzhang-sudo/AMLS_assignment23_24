@@ -10,6 +10,7 @@ from sklearn.svm import LinearSVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import AdaBoostClassifier, BaggingClassifier
 from sklearn.metrics import confusion_matrix, classification_report
+import time
 
 def main():
 
@@ -31,7 +32,7 @@ def main():
     X_train = x_train.reshape(x_train.shape[0], x_train.shape[1]**2)
     X_test = x_test.reshape(x_test.shape[0], x_test.shape[1]**2)
     X_val = x_val.reshape(x_val.shape[0], x_val.shape[1]**2)
-
+    time.sleep(1000)
     # Create the models
     
     models_name = ['Naive Bayes.jpg', 'LogReg.jpg', 'SGD.jpg', 'Perceptron.jpg', 'K_NN.jpg', 'MLPerceptron.jpg', 'SVC.jpg', 'Decision Tree.jpg', 'Adaboost.jpg', 'Bagging.jpg']
@@ -195,7 +196,7 @@ def validation(model, model_name, X_val, y_val, is_validation):
                 horizontalalignment="center",
                 color="white" if cm[i, j] > thresh else "black")
 
-    plt.title('Naïve Bayes')
+    plt.title(model_name)
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
     plt.tight_layout()
