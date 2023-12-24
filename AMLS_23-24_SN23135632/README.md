@@ -4,6 +4,7 @@
 
 In this project we develop several models for classification tasks. We use two datasets, on for binary classification and another for multiclass classification. The structure of the project is the following:
 
+```
 AMLS_ASSIGNMENT23_24/
 |- A/
 |  |- task_A.py (code for Task A)
@@ -33,6 +34,7 @@ AMLS_ASSIGNMENT23_24/
 |- helper.py (helper functions for Task A and B)
 |- main.py (main python file)
 |- README.md (Description of the project)
+```
 
 ### How to run
 
