@@ -1,4 +1,5 @@
 import itertools
+import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.naive_bayes import GaussianNB
@@ -40,7 +41,7 @@ def main():
 
     # Train the models
     fit_models = train(models, X_train, y_train)
-    # fit_nb, fit_logreg, fit_sgd, fit_percep, fit_knn, fit_mlp, fit_svc, fit_tree = fit_models
+    fit_nb, fit_logreg, fit_sgd, fit_percep, fit_knn, fit_mlp, fit_svc, fit_tree, fit_adaboost, fit_bagging = fit_models
 
     """
     fit_nb = nb_model.fit(X_train, y_train)
@@ -75,6 +76,9 @@ def main():
     if len(fit_models) == len(models_name):
         for i in range(len(fit_models)):
             validation(fit_models[i], models_name[i], X_test, y_test, is_validation=False)
+
+    model_weights_filename = 'knn_best_model_weights.sav'
+    pickle.dump(fit_knn, open(model_weights_filename, 'wb'))
 
     return
 
@@ -207,3 +211,9 @@ def validation(model, model_name, X_val, y_val, is_validation):
     report.close()
 
     return
+
+def predict(weights, X):
+    loaded_model = pickle.load(open(weights, 'rb'))
+    prediction = loaded_model.predict(X)
+
+    return prediction
