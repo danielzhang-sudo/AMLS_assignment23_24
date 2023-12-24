@@ -39,5 +39,5 @@ def main(args):
         x = X_test
         y = y_test
 
-    helper(task, mode, alg, ckpt_path, x, y, classes)
+    helper(task, mode, alg, ckpt_path, X_train, y_train, x, y, classes)
 

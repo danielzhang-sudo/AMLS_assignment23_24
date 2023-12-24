@@ -11,7 +11,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import AdaBoostClassifier, BaggingClassifier
 from sklearn.metrics import confusion_matrix, classification_report
 
-def helper(task, mode, alg, ckpt_path, x, y, classes):
+def helper(task, mode, alg, ckpt_path, X_train, y_train, x, y, classes):
     if mode == "training":
         # Create model
         model = create_model(task, mode, alg)
@@ -22,6 +22,8 @@ def helper(task, mode, alg, ckpt_path, x, y, classes):
     elif mode == "validation":
         # Create new model with different hyperparameters
         model = create_model(mode, alg)
+        # Train the new models 
+        fit_model = training(model, X_train, y_train)
         # Test new model on validation set
         testing(model, task, mode, alg, x, y, classes)
         ckpt_filename = f'./{alg}/{alg}_validation_weights.sav'
