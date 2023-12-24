@@ -28,6 +28,7 @@ def main():
     # Create models
     models = create_models()
 
+    fit_models = train(create_models)
 
     return
 
@@ -45,3 +46,11 @@ def create_models():
 
     models = [nb_model, logreg_model, sgd_model, percep_model, knn_model, mlp_model, svm_model, tree_model, adaboost_model, bagging_model]
     return models
+
+def train(models, X_train, y_train):
+    fit_models = []
+    for model in models:
+        fit_model = model.fit(X_train, y_train)
+        fit_models.append(fit_model)
+
+    return fit_models
