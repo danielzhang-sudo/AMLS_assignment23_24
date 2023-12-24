@@ -2,7 +2,7 @@
 
 ### Description of the project
 
-In this project we develop several models for classification tasks. We use two datasets, on for binary classification and another for multiclass classification. The structure of the project is the following:
+In this project we develop several models for classification tasks. We use two datasets, one for binary classification and another for multiclass classification. The structure of the project is the following:
 
 ```
 AMLS_ASSIGNMENT23_24/
@@ -38,7 +38,7 @@ AMLS_ASSIGNMENT23_24/
 
 ### How to run
 
-To run the code in your local machine, first install the dependecies with `pip install -f requirements.txt`. Next open the terminal in the project directory and execute the following:
+To run the code in your local machine, first install the dependecies with `pip install -f requirements.txt`. Next, create a folder called `Datasets`as shown above and put the datasets files in there. Finally, open the terminal in the project directory and execute the following:
 `python3 main.py --task [A/B] --mode [training/validation/testing] --alg [nb/logreg/sgd/percep/knn/mlp/svc/tree/adaboost/bagging] --ckpt_path [path_to_model_weights]`
 
 When running in testing mode, it is necessary to include the path to the saved model to load the weights, otherwise it is an optional argument.
